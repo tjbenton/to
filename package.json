@@ -1,5 +1,5 @@
 {
-  "name": "to",
+  "name": "to-js",
   "version": "0.0.0",
   "description": "A simple conversion library to convert one thing into something else",
   "main": "dist/to.js",
