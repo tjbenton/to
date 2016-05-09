@@ -40,6 +40,36 @@ test('to.string', async (t) => {
   t.end()
 })
 
+test('to.markdown', (t) => {
+  let str = [
+    '```js',
+    'function () {',
+    '  return "fuck yeah"',
+    '}',
+    '```'
+  ].join('\n')
+
+  let gfm = [
+    '<pre><code class="lang-js">function () {',
+    '  return &quot;fuck yeah&quot;',
+    '}',
+    '</code></pre>',
+    ''
+  ].join('\n')
+  let no_gfm = [
+    '<p><code>js',
+    'function () {',
+    '  return &quot;fuck yeah&quot;',
+    '}</code></p>',
+    ''
+  ].join('\n')
+  t.equals(to.markdown(str), gfm)
+  to.markdown({ gfm: false })
+  t.equals(to.markdown(str), no_gfm, "shouldn't have git hub flavored markdown enabled")
+  t.ok(to.markdown('blah', 'blah'))
+  t.end()
+})
+
 test('to.random', (s) => {
   s.test('to.random - array', (t) => {
     for (let i = 0; i < 1000; i++) {

@@ -25,7 +25,12 @@ const to = {
 /// Helper function to convert markdown text to html
 /// For more details on how to use marked [see](https://www.npmjs.com/package/marked)
 /// @returns {string} of `html`
-to.markdown = (...args) => markdown(to.string(to.flatten(...args)))
+to.markdown = (...args) => {
+  if (to.type(args[0]) === 'object') {
+    return markdown.setOptions(args[0])
+  }
+  return markdown(to.string(to.flatten(...args)))
+}
 
 
 /// @name to.type
@@ -681,7 +686,7 @@ to.array = (arg, glue = '\n') => {
 /// @returnes {array} - single dimensional
 to.flatten = (...args) => {
   const type = to.type(args[0])
-  if (type === 'array') {
+  if (type === 'array' || type !== 'object') {
     let _flatten = (arg) => is.array(arg) ? [].concat(...arg.map(_flatten)) : arg
     return _flatten(args.map(_flatten))
   } else if (type !== 'object') {
