@@ -442,3 +442,161 @@ test('to.regex', (t) => {
     'should be  `/whatup/gm`')
   t.end()
 })
+
+
+
+test('dot', (t) => {
+  t.strictEquals(to.dot(string), 'yo.this.is.a.string', 'should be `yo.this.is.a.string`')
+  t.end()
+})
+
+test('swapCase', (t) => {
+  t.strictEquals(to.swapCase(string), 'YO THIS IS A STRING', 'should be `YO THIS IS A STRING`')
+  t.end()
+})
+
+test('swap', (t) => {
+  t.strictEquals(to.swap(string), 'YO THIS IS A STRING', 'should be `YO THIS IS A STRING`')
+  t.end()
+})
+
+test('pathCase', (t) => {
+  t.strictEquals(to.pathCase(string), 'yo/this/is/a/string', 'should be `yo/this/is/a/string`')
+  t.end()
+})
+
+test('path', (t) => {
+  t.strictEquals(to.path(string), 'yo/this/is/a/string', 'should be `yo/this/is/a/string`')
+  t.end()
+})
+
+test('upperCase', (t) => {
+  t.strictEquals(to.upperCase(string), 'YO THIS IS A STRING', 'should be `YO THIS IS A STRING`')
+  t.end()
+})
+
+test('upper', (t) => {
+  t.strictEquals(to.upper(string), 'YO THIS IS A STRING', 'should be `YO THIS IS A STRING`')
+  t.end()
+})
+
+test('lowerCase', (t) => {
+  t.strictEquals(to.lowerCase(string), 'yo this is a string', 'should be `yo this is a string`')
+  t.end()
+})
+
+test('lower', (t) => {
+  t.strictEquals(to.lower(string), 'yo this is a string', 'should be `yo this is a string`')
+  t.end()
+})
+
+test('camelCase', (t) => {
+  t.strictEquals(to.camelCase(string), 'yoThisIsAString', 'should be `yoThisIsAString`')
+  t.end()
+})
+
+test('camel', (t) => {
+  t.strictEquals(to.camel(string), 'yoThisIsAString', 'should be `yoThisIsAString`')
+  t.end()
+})
+
+test('snakeCase', (t) => {
+  t.strictEquals(to.snakeCase(string), 'yo_this_is_a_string', 'should be `yo_this_is_a_string`')
+  t.end()
+})
+
+test('snake', (t) => {
+  t.strictEquals(to.snake(string), 'yo_this_is_a_string', 'should be `yo_this_is_a_string`')
+  t.end()
+})
+
+test('titleCase', (t) => {
+  t.strictEquals(to.titleCase(string), 'Yo This Is A String', 'should be `Yo This Is A String`')
+  t.end()
+})
+
+test('title', (t) => {
+  t.strictEquals(to.title(string), 'Yo This Is A String', 'should be `Yo This Is A String`')
+  t.end()
+})
+
+test('paramCase', (t) => {
+  t.strictEquals(to.paramCase(string), 'yo-this-is-a-string', 'should be `yo-this-is-a-string`')
+  t.end()
+})
+
+test('param', (t) => {
+  t.strictEquals(to.param(string), 'yo-this-is-a-string', 'should be `yo-this-is-a-string`')
+  t.end()
+})
+
+test('pascalCase', (t) => {
+  t.strictEquals(to.pascalCase(string), 'YoThisIsAString', 'should be `YoThisIsAString`')
+  t.end()
+})
+
+test('pascal', (t) => {
+  t.strictEquals(to.pascal(string), 'YoThisIsAString', 'should be `YoThisIsAString`')
+  t.end()
+})
+
+test('constantCase', (t) => {
+  t.strictEquals(to.constantCase(string), 'YO_THIS_IS_A_STRING', 'should be `YO_THIS_IS_A_STRING`')
+  t.end()
+})
+
+test('constant', (t) => {
+  t.strictEquals(to.constant(string), 'YO_THIS_IS_A_STRING', 'should be `YO_THIS_IS_A_STRING`')
+  t.end()
+})
+
+test('sentenceCase', (t) => {
+  t.strictEquals(to.sentenceCase(string), 'yo this is a string', 'should be `yo this is a string`')
+  t.end()
+})
+
+test('sentence', (t) => {
+  t.strictEquals(to.sentence(string), 'yo this is a string', 'should be `yo this is a string`')
+  t.end()
+})
+
+test('isUpperCase', (t) => {
+  t.notOk(to.isUpperCase(string), false, 'should be `false`')
+  t.end()
+})
+
+test('isUpper', (t) => {
+  t.notOk(to.isUpper(string), false, 'should be `false`')
+  t.end()
+})
+
+test('isLowerCase', (t) => {
+  t.ok(to.isLowerCase(string), true, 'should be `true`')
+  t.end()
+})
+
+test('isLower', (t) => {
+  t.ok(to.isLower(string), true, 'should be `true`')
+  t.end()
+})
+
+test('upperCaseFirst', (t) => {
+  t.strictEquals(to.upperCaseFirst(string), 'Yo this is a string', 'should be `Yo this is a string`')
+  t.end()
+})
+
+test('ucFirst', (t) => {
+  t.strictEquals(to.ucFirst(string), 'Yo this is a string', 'should be `Yo this is a string`')
+  t.end()
+})
+
+test('lowerCaseFirst', (t) => {
+  t.strictEquals(to.lowerCaseFirst(string), 'yo this is a string', 'should be `yo this is a string`')
+  t.end()
+})
+
+test('lcFirst', (t) => {
+  t.strictEquals(to.lcFirst(string), 'yo this is a string', 'should be `yo this is a string`')
+  t.end()
+})
+
