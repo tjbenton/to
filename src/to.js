@@ -868,12 +868,10 @@ to.regex = (...args/* , flags */) => {
   if (args.length > 1) {
     flags = args.pop()
     const length = flags.length
-    const test = (flags.match(/[gimy]+/) || []).slice().length
     if (is.any.falsy(
       to.clamp(length, 1, 3) === length,
-      test && test !== length
+      flags.match(/[gimy]+/) !== null
     )) {
-      console.log('wtf')
       args.push(flags)
       flags = ''
     }
