@@ -466,9 +466,25 @@ test('to.number', (t) => {
 
 
 test('to.regex', (t) => {
-  t.ok(to.regex('whatup').toString() === /whatup/.toString(),
+  const types = '(?:{(.*)})?'
+  const name = '([^\\s]*)?'
+  const space = '(?:\\s*)?'
+  const value = '(?:\\[(.*)\\])?'
+  const id = '(?:\\((.*)\\))?'
+  const description = '(?:\\s*\\-?\\s+)?(.*)?'
+
+  let rg = {}
+
+  rg.arg = {
+    regex: [ types, space, name, space, value, space, description ],
+    flags: 'i'
+  }
+
+  t.strictEquals(to.regex(...rg.arg.regex, rg.arg.flags).toString(), `/${rg.arg.regex.join('')}/${rg.arg.flags}`,
+    `should be \`/${rg.arg.regex.join('')}/${rg.arg.flags}\``)
+  t.strictEquals(to.regex('whatup').toString(), /whatup/.toString(),
     'should be  `/whatup/`')
-  t.ok(to.regex('whatup', 'gm').toString() === /whatup/gm.toString(),
+  t.strictEquals(to.regex('whatup', 'gm').toString(), /whatup/gm.toString(),
     'should be  `/whatup/gm`')
   t.end()
 })
