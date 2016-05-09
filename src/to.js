@@ -33,15 +33,7 @@ to.markdown = (...args) => markdown(to.string(to.flatten(...args)))
 /// since `typeof` can't tell the difference between an array and an actual object
 /// this function will return the correct result
 /// @returns {string}
-to.type = (arg) => {
-  let result = toString(arg).slice(8, -1).toLowerCase()
-
-  if (result === 'uint8array') {
-    return 'buffer'
-  }
-
-  return result
-}
+to.type = (arg) => Buffer.isBuffer(arg) ? 'buffer' : toString(arg).slice(8, -1).toLowerCase()
 
 /// @name to.clamp
 /// @description
