@@ -1,0 +1,7 @@
+.git
+.nyc_output
+.eslin*
+*.log
+.travis*
+src/
+test/
