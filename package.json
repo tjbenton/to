@@ -1,6 +1,6 @@
 {
   "name": "to-js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A simple conversion library to convert one thing into something else",
   "main": "dist/to.js",
   "scripts": {
