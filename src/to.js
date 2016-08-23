@@ -20,16 +20,57 @@ const to = {
   clone
 }
 
+/// @name to.extend
+/// @description
+/// Extend object `b` onto `a`
+/// http://jsperf.com/deep-extend-comparison
+/// @arg {object} a - Source object.
+/// @arg {object} b - Object to extend with.
+/// @returns {object} The extended object.
+to.extend = (a, b) => {
+  // Don't touch `null` or `undefined` objects.
+  if (!a || !b) {
+    return a
+  }
+
+  for (let k in b) {
+    if (b.hasOwnProperty(k)) {
+      if (is.plainObject(b[k])) {
+        a[k] = is.plainObject(a[k]) ? to.extend(a[k], b[k]) : b[k]
+      } else {
+        a[k] = b[k]
+      }
+    }
+  }
+
+  return a
+}
+
+
 /// @name to.markdown
 /// @description
 /// Helper function to convert markdown text to html
 /// For more details on how to use marked [see](https://www.npmjs.com/package/marked)
 /// @returns {string} of `html`
 to.markdown = (...args) => {
+  let options = {}
   if (to.type(args[0]) === 'object') {
-    return markdown.setOptions(args[0])
+    options = args[0]
+    return to.markdown.setOptions(options)
   }
-  return markdown(to.string(to.flatten(...args)))
+  return markdown(to.string(to.flatten(...args)), options)
+}
+
+to.markdown.setOptions = (options = {}) => {
+  markdown.setOptions(global.markdown_options = to.extend(global.markdown_options || {}, options))
+}
+
+// call set options once to set the globally defined options
+to.markdown.setOptions()
+
+to.markdown.resetOptions = () => {
+  global.markdown_options = {}
+  to.markdown.setOptions()
 }
 
 
@@ -512,32 +553,6 @@ to.arguments = (defaults = {}, ...args) => {
   }
 
   return to.extend(defaults, result)
-}
-
-/// @name to.extend
-/// @description
-/// Extend object `b` onto `a`
-/// http://jsperf.com/deep-extend-comparison
-/// @arg {object} a - Source object.
-/// @arg {object} b - Object to extend with.
-/// @returns {object} The extended object.
-to.extend = (a, b) => {
-  // Don't touch `null` or `undefined` objects.
-  if (!a || !b) {
-    return a
-  }
-
-  for (let k in b) {
-    if (b.hasOwnProperty(k)) {
-      if (is.plainObject(b[k])) {
-        a[k] = is.plainObject(a[k]) ? to.extend(a[k], b[k]) : b[k]
-      } else {
-        a[k] = b[k]
-      }
-    }
-  }
-
-  return a
 }
 
 /// @name to.merge
