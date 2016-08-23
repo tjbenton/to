@@ -53,10 +53,24 @@ to.extend = (a, b) => {
 /// For more details on how to use marked [see](https://www.npmjs.com/package/marked)
 /// @returns {string} of `html`
 to.markdown = (...args) => {
+  let options = {}
   if (to.type(args[0]) === 'object') {
-    return markdown.setOptions(args[0])
+    options = args[0]
+    return to.markdown.setOptions(options)
   }
-  return markdown(to.string(to.flatten(...args)))
+  return markdown(to.string(to.flatten(...args)), options)
+}
+
+to.markdown.setOptions = (options = {}) => {
+  markdown.setOptions(global.markdown_options = to.extend(global.markdown_options || {}, options))
+}
+
+// call set options once to set the globally defined options
+to.markdown.setOptions()
+
+to.markdown.resetOptions = () => {
+  global.markdown_options = {}
+  to.markdown.setOptions()
 }
 
 
