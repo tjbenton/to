@@ -20,6 +20,33 @@ const to = {
   clone
 }
 
+/// @name to.extend
+/// @description
+/// Extend object `b` onto `a`
+/// http://jsperf.com/deep-extend-comparison
+/// @arg {object} a - Source object.
+/// @arg {object} b - Object to extend with.
+/// @returns {object} The extended object.
+to.extend = (a, b) => {
+  // Don't touch `null` or `undefined` objects.
+  if (!a || !b) {
+    return a
+  }
+
+  for (let k in b) {
+    if (b.hasOwnProperty(k)) {
+      if (is.plainObject(b[k])) {
+        a[k] = is.plainObject(a[k]) ? to.extend(a[k], b[k]) : b[k]
+      } else {
+        a[k] = b[k]
+      }
+    }
+  }
+
+  return a
+}
+
+
 /// @name to.markdown
 /// @description
 /// Helper function to convert markdown text to html
@@ -512,32 +539,6 @@ to.arguments = (defaults = {}, ...args) => {
   }
 
   return to.extend(defaults, result)
-}
-
-/// @name to.extend
-/// @description
-/// Extend object `b` onto `a`
-/// http://jsperf.com/deep-extend-comparison
-/// @arg {object} a - Source object.
-/// @arg {object} b - Object to extend with.
-/// @returns {object} The extended object.
-to.extend = (a, b) => {
-  // Don't touch `null` or `undefined` objects.
-  if (!a || !b) {
-    return a
-  }
-
-  for (let k in b) {
-    if (b.hasOwnProperty(k)) {
-      if (is.plainObject(b[k])) {
-        a[k] = is.plainObject(a[k]) ? to.extend(a[k], b[k]) : b[k]
-      } else {
-        a[k] = b[k]
-      }
-    }
-  }
-
-  return a
 }
 
 /// @name to.merge
