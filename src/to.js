@@ -58,7 +58,7 @@ to.markdown = (...args) => {
     options = args[0]
     return to.markdown.setOptions(options)
   }
-  return markdown(to.string(to.flatten(...args)), options)
+  return markdown(to.string(to.flatten(...args)), global.markdown_options || {})
 }
 
 to.markdown.setOptions = (options = {}) => {
